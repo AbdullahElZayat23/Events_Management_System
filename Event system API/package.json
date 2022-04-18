@@ -1,0 +1,27 @@
+{
+  "name": "event-system-api",
+  "version": "1.0.0",
+  "description": "API for serving event management system with data",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdullahElZayat23/Events_Management_System.git"
+  },
+  "keywords": [
+    "API",
+    "EventsManagementSystem"
+  ],
+  "author": "Abdullah elZayat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbdullahElZayat23/Events_Management_System/issues"
+  },
+  "homepage": "https://github.com/AbdullahElZayat23/Events_Management_System#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  }
+}
