@@ -1,11 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Student_Model = require('./Models/Student.js');
-const Speaker_Model = require('./Models/Speaker.js');
-const Event_Model = require('./Models/Event.js');
 const Student_router = require('./Routers/StudentRouter.js');
 const Speaker_router = require('./Routers/SpeakerRouter.js');
 const Event_router = require('./Routers/EventsRouter.js');
@@ -35,7 +31,7 @@ app.use(Speaker_router);
 app.use(Event_router);
 
 //Notfound middleware
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).send({
         status: 404,
         error: 'Not found'
@@ -43,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 //Error middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     res.status(err.status || 500).send({
         error: {
             status: err.status || 500,
