@@ -21,7 +21,12 @@
   },
   "homepage": "https://github.com/AbdullahElZayat23/Events_Management_System#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
-    "mongoose": "^6.3.0"
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.3.0",
+    "mongoose-sequence": "^5.3.1",
+    "morgan": "^1.10.0"
   }
 }
