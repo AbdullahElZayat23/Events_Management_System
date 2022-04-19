@@ -5,38 +5,33 @@ const mongoose = require('mongoose');
 const Student_router = require('./Routers/StudentRouter.js');
 const Speaker_router = require('./Routers/SpeakerRouter.js');
 const Event_router = require('./Routers/EventsRouter.js');
+const Notfound = require('./middleware/NotFound.js');
+const DB = require('./DataBase/DBConnection.js');
 var cors = require('cors')
+const Admin = require('./Models/Admin.js');
 
 const app = express();
 app.use(cors());
 
-mongoose.connect('mongodb://localhost:27017/event-system').then(() => {
-    console.log('Connected to MongoDB');
-}).catch(err => {
-    console.log('Could not connect to MongoDB');
-    console.log(err);
-});
+DB.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //logging middleware
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
-
 // Autehtication middleware
 
 //Routes middleware
+app.get('/', (req, res) => {
+    res.send('Hello');
+});
 app.use(Student_router);
 app.use(Speaker_router);
 app.use(Event_router);
 
 //Notfound middleware
-app.use((req, res) => {
-    res.status(404).send({
-        status: 404,
-        error: 'Not found'
-    })
-});
+app.use(Notfound);
 
 //Error middleware
 app.use((err, req, res) => {
@@ -47,7 +42,6 @@ app.use((err, req, res) => {
         },
     })
 });
-
 
 let port = process.env.PORT || 1000;
 app.listen(1000, () => console.log(`Server is listening on port ${port}.`));
