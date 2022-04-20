@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator');
 const md5 = require("md5");
 
 module.exports.GetAllStudents = (req, res, next) => {
-    Student.find({}).then((students) => { res.json(students); }).catch(err => { next(err); });
+    Student.find({}).then((students) => { res.json(students); }).catch(err => { next(err.message); });
 };
 module.exports.GetStudentById = (req, res, next) => {
     Student.findById(req.params.id).then((data) => {
@@ -14,7 +14,7 @@ module.exports.GetStudentById = (req, res, next) => {
         }
 
 
-    }).catch(err => { next(err); });
+    }).catch(err => { next(err.message); });
 }
 module.exports.CreateStudent = (req, res, next) => {
         Student.findOne({ email: req.body.Email }).then((data) => {
@@ -23,7 +23,7 @@ module.exports.CreateStudent = (req, res, next) => {
             } else {
                 req.body.password = md5(req.body.password);
                 Student.create(req.body).then((data) => { res.status(200).json({ message: "Student created", data }); }).catch(err => {
-                    next(err);
+                    next(err.message);
                 });
             }
         });
@@ -41,7 +41,7 @@ module.exports.UpdateStudentEmail = (req, res, next) => {
                         res.status(200).json({ message: "Student not updated" });
                     }
                 }).catch(err => {
-                    next(err);
+                    next(err.message);
                 });
             }
         });
@@ -56,7 +56,7 @@ module.exports.UpdateStudentPassword = (req, res, next) => {
             res.status(200).json({ message: "Student not updated" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -68,6 +68,6 @@ module.exports.DeleteStudent = (req, res, next) => {
             res.status(200).json({ message: "Student not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }

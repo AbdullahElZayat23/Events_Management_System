@@ -1,7 +1,7 @@
 const Event = require("../Models/Event");
 var md5 = require('md5');
 module.exports.GetAllEvents = (req, res, next) => {
-    Event.find({}).then((Events) => { res.json(Events); }).catch(err => { next(err); });
+    Event.find({}).then((Events) => { res.json(Events); }).catch(err => { next(err.message); });
 };
 module.exports.GetEventById = (req, res, next) => {
     Event.findById(req.params.id).then((data) => {
@@ -10,7 +10,7 @@ module.exports.GetEventById = (req, res, next) => {
         } else {
             res.status(200).json({ message: "Event not found" });
         }
-    }).catch(err => { next(err); });
+    }).catch(err => { next(err.message); });
 }
 module.exports.CreateEvent = (req, res, next) => {
 
@@ -20,7 +20,7 @@ module.exports.CreateEvent = (req, res, next) => {
             } else {
                 res.status(200).json({ message: "Event not created" });
             }
-        }).catch(err => { next(err); });
+        }).catch(err => { next(err.message); });
 
     }
     //update event
@@ -32,7 +32,7 @@ module.exports.UpdateEvent = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -45,7 +45,7 @@ module.exports.AddEventMainSpeaker = (req, res, next) => {
                 res.status(200).json({ message: "Event not found" });
             }
         }).catch(err => {
-            next(err);
+            next(err.message);
         });
     }
     //add event sub speaker
@@ -57,7 +57,7 @@ module.exports.AddEventSubSpeaker = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -70,7 +70,7 @@ module.exports.AddEventStudents = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -83,7 +83,7 @@ module.exports.DeleteEventMainSpeaker = (req, res, next) => {
                 res.status(200).json({ message: "Event not found" });
             }
         }).catch(err => {
-            next(err);
+            next(err.message);
         });
     }
     //delete event sub speaker
@@ -95,7 +95,7 @@ module.exports.DeleteEventSubSpeaker = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -108,7 +108,7 @@ module.exports.DeleteEventStudent = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 
@@ -120,7 +120,7 @@ module.exports.DeleteEvent = (req, res, next) => {
                 res.status(200).json({ message: "Event not found" });
             }
         }).catch(err => {
-            next(err);
+            next(err.message);
         });
     }
     //decline event
@@ -132,6 +132,6 @@ module.exports.DeclineEvent = (req, res, next) => {
             res.status(200).json({ message: "Event not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }

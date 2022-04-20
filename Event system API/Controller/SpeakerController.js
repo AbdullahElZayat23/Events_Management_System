@@ -1,7 +1,7 @@
 const Speaker = require("../Models/Speaker");
 var md5 = require('md5');
 module.exports.GetAllSpeakers = (req, res, next) => {
-    Speaker.find({}).then((Speakers) => { res.json(Speakers); }).catch(err => { next(err); });
+    Speaker.find({}).then((Speakers) => { res.json(Speakers); }).catch(err => { next(err.message); });
 };
 module.exports.GetSpeakerById = (req, res, next) => {
     Speaker.findById(req.params.id).then((data) => {
@@ -10,7 +10,7 @@ module.exports.GetSpeakerById = (req, res, next) => {
         } else {
             res.status(200).json({ message: "Speaker not found" });
         }
-    }).catch(err => { next(err); });
+    }).catch(err => { next(err.message); });
 }
 module.exports.CreateSpeaker = (req, res, next) => {
 
@@ -20,7 +20,7 @@ module.exports.CreateSpeaker = (req, res, next) => {
         } else {
             req.body.password = md5(req.body.password);
             Speaker.create(req.body).then((data) => { res.status(200).json({ message: "Speaker created", data }); }).catch(err => {
-                next(err);
+                next(err.message);
             });
         }
     });
@@ -36,7 +36,7 @@ module.exports.UpdateSpeakerPassword = (req, res, next) => {
                 res.status(200).json({ message: "Speaker not updated" });
             }
         }).catch(err => {
-            next(err);
+            next(err.message);
         });
     }
     //update speaker email
@@ -53,7 +53,7 @@ module.exports.UpdateSpeakerEmail = (req, res, next) => {
                     }
 
                 }).catch(err => {
-                    next(err);
+                    next(err.message);
                 });
             }
         });
@@ -67,7 +67,7 @@ module.exports.UpdateSpeakerUsername = (req, res, next) => {
                 res.status(200).json({ message: "Speaker not updated" });
             }
         }).catch(err => {
-            next(err);
+            next(err.message);
         });
     }
     //update speaker address
@@ -79,7 +79,7 @@ module.exports.UpdateSpeakerAddress = (req, res, next) => {
             res.status(200).json({ message: "Speaker not updated" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }
 module.exports.DeleteSpeaker = (req, res, next) => {
@@ -90,6 +90,6 @@ module.exports.DeleteSpeaker = (req, res, next) => {
             res.status(200).json({ message: "Speaker not found" });
         }
     }).catch(err => {
-        next(err);
+        next(err.message);
     });
 }

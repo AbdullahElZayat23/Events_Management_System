@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const Student_router = require('./Routers/StudentRouter.js');
 const Speaker_router = require('./Routers/SpeakerRouter.js');
 const Event_router = require('./Routers/EventsRouter.js');
+const login = require('./Routers/AuththenticateRouter.js');
 const Notfound = require('./middleware/NotFound.js');
 const DB = require('./DataBase/DBConnection.js');
 var cors = require('cors')
 const Admin = require('./Models/Admin.js');
 
+
 const app = express();
 app.use(cors());
 
 DB.connect();
+Admin();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,11 +23,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //logging middleware
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 // Autehtication middleware
+app.use(login);
+// console.log(token);
 
 //Routes middleware
 app.get('/', (req, res) => {
-    res.send('Hello');
+    res.send('Hello to Event system API');
 });
+app.get('/api', (req, res) => {
+    res.send('Hello to Event system API');
+});
+
 app.use(Student_router);
 app.use(Speaker_router);
 app.use(Event_router);
