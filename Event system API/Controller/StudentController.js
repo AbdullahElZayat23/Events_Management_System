@@ -1,27 +1,73 @@
 const Student = require("../Models/Student");
+const { body, validationResult } = require('express-validator');
+const md5 = require("md5");
 
 module.exports.GetAllStudents = (req, res, next) => {
     Student.find({}).then((students) => { res.json(students); }).catch(err => { next(err); });
 };
 module.exports.GetStudentById = (req, res, next) => {
-    Student.findById(req.params.id).then((student) => { res.status(200).json(student); }).catch(err => { next(err); });
+    Student.findById(req.params.id).then((data) => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(200).json({ message: "Student not found" });
+        }
+
+
+    }).catch(err => { next(err); });
 }
 module.exports.CreateStudent = (req, res, next) => {
-    Student.create(req.body).then((data) => {
-        res.status(200).json({ message: "student created", data })
+        Student.findOne({ email: req.body.Email }).then((data) => {
+            if (data) {
+                res.status(200).json({ message: "Email already exists" });
+            } else {
+                req.body.password = md5(req.body.password);
+                Student.create(req.body).then((data) => { res.status(200).json({ message: "Student created", data }); }).catch(err => {
+                    next(err);
+                });
+            }
+        });
+    }
+    //update student email
+module.exports.UpdateStudentEmail = (req, res, next) => {
+        Student.findOne({ Email: req.body.Email }).then((data) => {
+            if (data) {
+                res.status(200).json({ message: "Email already exists" });
+            } else {
+                Student.findByIdAndUpdate(req.params.id, { Email: req.body.Email }).then((data) => {
+                    if (data) {
+                        res.status(200).json({ message: "Student updated" });
+                    } else {
+                        res.status(200).json({ message: "Student not updated" });
+                    }
+                }).catch(err => {
+                    next(err);
+                });
+            }
+        });
+    }
+    //update student password
+module.exports.UpdateStudentPassword = (req, res, next) => {
+    req.body.password = md5(req.body.password);
+    Student.findByIdAndUpdate(req.params.id, { password: req.body.password }).then((data) => {
+        if (data) {
+            res.status(200).json({ message: "Student updated" });
+        } else {
+            res.status(200).json({ message: "Student not updated" });
+        }
     }).catch(err => {
         next(err);
     });
 }
-module.exports.UpdateStudent = (req, res, next) => {
-    Student.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).then((data) => {
-        res.status(200).json({ message: "student updated", data });
-    }).catch(err => {
-        next(err);
-    });
-}
+
 module.exports.DeleteStudent = (req, res, next) => {
-    Student.findByIdAndRemove(req.params.id).then((data) => { res.status(200).json({ message: "student deleted", data }); }).catch(err => {
+    Student.findByIdAndRemove(req.params.id).then((data) => {
+        if (data) {
+            res.status(200).json({ message: "Student deleted" });
+        } else {
+            res.status(200).json({ message: "Student not found" });
+        }
+    }).catch(err => {
         next(err);
     });
 }

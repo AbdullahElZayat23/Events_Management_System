@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const autoINC = require('mongoose-sequence')(mongoose);
 
 const Speaker_schema = new mongoose.Schema({
-    _id: Schema.Types.ObjectId,
+    _id: Number,
     Email: { type: String, unique: [true, 'Email already exists'] },
     UserName: String,
     password: String,
@@ -12,4 +12,6 @@ const Speaker_schema = new mongoose.Schema({
         Building: String,
     },
 });
+
+Speaker_schema.plugin(autoINC, { id: 'speaker_id_seq', inc_field: '_id' });
 module.exports = mongoose.model('Speaker', Speaker_schema);
