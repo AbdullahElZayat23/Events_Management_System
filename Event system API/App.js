@@ -9,6 +9,7 @@ const Notfound = require('./middleware/NotFound.js');
 const DB = require('./DataBase/DBConnection.js');
 var cors = require('cors')
 const Admin = require('./Models/Admin.js');
+const Authenticate = require('./middleware/Authenticate.js');
 
 
 const app = express();
@@ -24,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 // Autehtication middleware
 app.use(login);
+app.use(Authenticate);
+
 // console.log(token);
 
 //Routes middleware

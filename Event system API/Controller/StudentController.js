@@ -17,7 +17,7 @@ module.exports.GetStudentById = (req, res, next) => {
     }).catch(err => { next(err.message); });
 }
 module.exports.CreateStudent = (req, res, next) => {
-        Student.findOne({ email: req.body.Email }).then((data) => {
+        Student.findOne({ Email: req.body.Email }).then((data) => {
             if (data) {
                 res.status(200).json({ message: "Email already exists" });
             } else {
