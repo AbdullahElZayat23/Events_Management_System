@@ -10,8 +10,7 @@ const DB = require('./DataBase/DBConnection.js');
 var cors = require('cors')
 const Admin = require('./Models/Admin.js');
 const Authenticate = require('./middleware/Authenticate.js');
-
-
+const NotAuthorized = require('./middleware/NotAuthorized.js');
 const app = express();
 app.use(cors());
 
@@ -41,17 +40,13 @@ app.use(Student_router);
 app.use(Speaker_router);
 app.use(Event_router);
 
+app.get('/NotAuthorized', NotAuthorized);
 //Notfound middleware
 app.use(Notfound);
 
 //Error middleware
 app.use((err, req, res) => {
-    res.status(err.status || 500).send({
-        error: {
-            status: err.status || 500,
-            message: err.message || "Internal Server Error",
-        },
-    })
+    req.send({ message: "Something went wrong" + res.status + err.message });
 });
 
 let port = process.env.PORT || 1000;

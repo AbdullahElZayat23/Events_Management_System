@@ -4,16 +4,70 @@ const Speaker = require('../Controller/SpeakerController');
 let path = '/api/speakers/';
 router.route('/api/speakers')
     .get((req, res, next) => {
-        Speaker.GetAllSpeakers(req, res, next);
+        if (req.role == 'Admin') {
+            Speaker.GetAllSpeakers(req, res, next);
+        } else {
+            res.redirect('/NotAuthorized');
+        }
+
     })
     .post((req, res, next) => {
-        Speaker.CreateSpeaker(req, res, next);
-    });
-router.delete(path + ':id', (req, res, next) => { Speaker.DeleteSpeaker(req, res, next); });
-router.put(path + 'email' + '/:id', (req, res, next) => { Speaker.UpdateSpeakerEmail(req, res, next); });
-router.put(path + 'password' + '/:id', (req, res, next) => { Speaker.UpdateSpeakerPassword(req, res, next); });
-router.put(path + 'username' + '/:id', (req, res, next) => { Speaker.UpdateSpeakerUsername(req, res, next); });
-router.put(path + 'address' + '/:id', (req, res, next) => { Speaker.UpdateSpeakerAddress(req, res, next); });
-router.get(path + ':id', (req, res, next) => { Speaker.GetSpeakerById(req, res, next) });
+        if (req.role == 'Admin' || req.role == 'Speaker') {
+            Speaker.CreateSpeaker(req, res, next);
+        } else {
+            res.redirect('/NotAuthorized');
+        }
 
+    });
+router.delete(path + ':id', (req, res, next) => {
+    if (req.role == 'Admin' || req.role == 'Speaker') {
+        Speaker.DeleteSpeaker(req, res, next);
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
+router.put(path + 'email' + '/:id', (req, res, next) => {
+    if (req.role == 'Speaker') {
+        Speaker.UpdateSpeakerEmail(req, res, next);
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
+router.put(path + 'password' + '/:id', (req, res, next) => {
+    if (req.role == 'Speaker') {
+        Speaker.UpdateSpeakerPassword(req, res, next);
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
+router.put(path + 'username' + '/:id', (req, res, next) => {
+    if (req.role == 'Speaker') {
+        Speaker.UpdateSpeakerUsername(req, res, next);
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
+router.put(path + 'address' + '/:id', (req, res, next) => {
+    if (req.role == 'Speaker') {
+        Speaker.UpdateSpeakerAddress(req, res, next);
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+
+});
+router.get(path + ':id', (req, res, next) => {
+    if (req.role == 'Admin' || req.role == 'Speaker') {
+        Speaker.GetSpeakerById(req, res, next)
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
+
+router.get(path + 'events' + '/:id', (req, res, next) => {
+    if (req.role == 'Admin' || req.role == 'Speaker') {
+        Speaker.GetSpeakerEvents(req, res, next)
+    } else {
+        res.redirect('/NotAuthorized');
+    }
+});
 module.exports = router;

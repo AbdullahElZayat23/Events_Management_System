@@ -1,4 +1,5 @@
 const Speaker = require("../Models/Speaker");
+const Events = require("../Models/Event");
 var md5 = require('md5');
 module.exports.GetAllSpeakers = (req, res, next) => {
     Speaker.find({}).then((Speakers) => { res.json(Speakers); }).catch(err => { next(err.message); });
@@ -14,12 +15,12 @@ module.exports.GetSpeakerById = (req, res, next) => {
 }
 module.exports.CreateSpeaker = (req, res, next) => {
 
-    Speaker.findOne({ email: req.body.Email }).then((data) => {
+    Speaker.findOne({ Email: req.body.Email }).then((data) => {
         if (data) {
             res.status(200).json({ message: "Email already exists" });
         } else {
             req.body.password = md5(req.body.password);
-            Speaker.create(req.body).then((data) => { res.status(200).json({ message: "Speaker created", data }); }).catch(err => {
+            Speaker.create(req.body).then((data) => { res.status(200).json({ message: "Speaker created" }); }).catch(err => {
                 next(err.message);
             });
         }
@@ -92,4 +93,18 @@ module.exports.DeleteSpeaker = (req, res, next) => {
     }).catch(err => {
         next(err.message);
     });
+}
+
+//get all speaker events
+module.exports.GetSpeakerEvents = (req, res, next) => {
+    Events.find({ $or: [{ MainSpeakerID: req.params.id }, { SubSpeakerSID: req.params.id }] }).then((data) => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(200).json({ message: "Speaker not found" });
+        }
+    }).catch(err => {
+        next(err.message);
+    });
+
 }

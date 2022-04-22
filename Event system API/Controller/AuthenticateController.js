@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const admin = require("../Models/Admin");
 const student = require("../Models/Student");
 const speaker = require("../Models/Speaker");
+const { CreateStudent } = require("../Controller/StudentController");
+const { CreateSpeaker } = require("../Controller/SpeakerController");
 const fs = require('fs');
 const md5 = require('md5');
 
@@ -72,3 +74,6 @@ module.exports.Speakerlogin = (req, res, next) => {
         next(err);
     });
 }
+
+module.exports.Studentregister = CreateStudent;
+module.exports.Speakerregister = CreateSpeaker;

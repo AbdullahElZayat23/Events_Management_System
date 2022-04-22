@@ -7,4 +7,8 @@ router.post("/admin/login", (req, res, next) => { controller.Adminlogin(req, res
 router.post("/student/login", (req, res, next) => { controller.Studentlogin(req, res, next) });
 router.post("/speaker/login", (req, res, next) => { controller.Speakerlogin(req, res, next) });
 
+router.post("/student/register", (req, res, next) => { controller.Studentregister(req, res, next) });
+router.post("/speaker/register", (req, res, next) => { controller.Speakerregister(req, res, next) });
+
+
 module.exports = router;
