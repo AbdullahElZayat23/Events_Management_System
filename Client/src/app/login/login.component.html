@@ -1,0 +1,41 @@
+<form class="col-lg-5 m-auto mt-5" (submit)="LogIn(inputEmail3.value,inputPassword3.value)">
+    <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email or Username</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" #inputEmail3 required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" #inputPassword3 required>
+        </div>
+    </div>
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-2 pt-0">Log in as:</legend>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="UserType" id="gridRadiosAdmin" value="Admin" checked>
+                <label class="form-check-label" for="gridRadios1">
+            Admin
+          </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="UserType" id="gridRadiosStudent" value="Student">
+                <label class="form-check-label" for="gridRadios2">
+            Student
+          </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="UserType" id="gridRadiosSpeaker" value="Speaker">
+                <label class="form-check-label" for="gridRadios3">
+            Speaker
+          </label>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Log in</button>
+    <a [routerLink]="['/register','student']" class="btn btn-primary ms-5">Sign Up as Student</a>
+    <a [routerLink]="['/register','speaker']" class="btn btn-primary ms-5">Sign Up as Speaker</a>
+
+</form>

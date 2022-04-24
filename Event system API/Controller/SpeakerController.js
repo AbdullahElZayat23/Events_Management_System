@@ -24,21 +24,28 @@ module.exports.CreateSpeaker = (req, res, next) => {
                 next(err.message);
             });
         }
+    }).catch(err => {
+        next(err.message);
     });
 }
 
 //update speaker password
 module.exports.UpdateSpeakerPassword = (req, res, next) => {
-        req.body.password = md5(req.body.password);
-        Speaker.findByIdAndUpdate(req.params.id, { password: req.body.password }).then((data) => {
-            if (data) {
-                res.status(200).json({ message: "Speaker updated" });
-            } else {
-                res.status(200).json({ message: "Speaker not updated" });
-            }
-        }).catch(err => {
-            next(err.message);
-        });
+        try {
+            req.body.password = md5(req.body.password);
+            Speaker.findByIdAndUpdate(req.params.id, { password: req.body.password }).then((data) => {
+                if (data) {
+                    res.status(200).json({ message: "Speaker updated" });
+                } else {
+                    res.status(200).json({ message: "Speaker not updated" });
+                }
+            }).catch(err => {
+                next(err.message);
+            });
+
+        } catch (error) {
+            next(error.message);
+        }
     }
     //update speaker email
 module.exports.UpdateSpeakerEmail = (req, res, next) => {
@@ -57,6 +64,8 @@ module.exports.UpdateSpeakerEmail = (req, res, next) => {
                     next(err.message);
                 });
             }
+        }).catch(err => {
+            next(err.message);
         });
     }
     //update speaker username

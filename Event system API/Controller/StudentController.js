@@ -46,35 +46,40 @@ module.exports.UpdateStudentEmail = (req, res, next) => {
                     next(err.message);
                 });
             }
+        }).catch(err => {
+            next(err.message);
         });
     }
     //update student password
 module.exports.UpdateStudentPassword = (req, res, next) => {
-    req.body.password = md5(req.body.password);
-    Student.findByIdAndUpdate(req.params.id, { password: req.body.password }).then((data) => {
-        if (data) {
-            res.status(200).json({ message: "Student updated" });
-        } else {
-            res.status(200).json({ message: "Student not updated" });
-        }
-    }).catch(err => {
-        next(err.message);
-    });
-}
+    try {
+        req.body.password = md5(req.body.password);
+        Student.findByIdAndUpdate(req.params.id, { password: req.body.password }).then((data) => {
+            if (data) {
+                res.status(200).json({ message: "Student updated" });
+            } else {
+                res.status(200).json({ message: "Student not updated" });
+            }
+        }).catch(err => {
+            next(err.message);
+        });
+    } catch (error) {
+        next(error.message);
+    }
 
+}
 module.exports.DeleteStudent = (req, res, next) => {
-    Student.findByIdAndRemove(req.params.id).then((data) => {
-        if (data) {
-            res.status(200).json({ message: "Student deleted" });
-        } else {
-            res.status(200).json({ message: "Student not found" });
-        }
-    }).catch(err => {
-        next(err.message);
-    });
-}
-
-//get students events
+        Student.findByIdAndRemove(req.params.id).then((data) => {
+            if (data) {
+                res.status(200).json({ message: "Student deleted" });
+            } else {
+                res.status(200).json({ message: "Student not found" });
+            }
+        }).catch(err => {
+            next(err.message);
+        });
+    }
+    //get students events
 module.exports.GetStudentEvents = (req, res, next) => {
     Events.find({ StudentSID: req.params.id }).then((data) => {
         if (data) {

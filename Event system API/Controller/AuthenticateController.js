@@ -20,7 +20,8 @@ module.exports.Adminlogin = (req, res, next) => {
             }, privateKey, { expiresIn: '1h' });
             res.json({
                 token: token,
-                role: "Admin"
+                role: "Admin",
+                id: data._id
             });
         } else {
             res.send({ message: "Not Authenticated" });
@@ -42,7 +43,8 @@ module.exports.Studentlogin = (req, res, next) => {
             }, privateKey, { expiresIn: '1h' });
             res.json({
                 token: token,
-                role: "Student"
+                role: "Student",
+                id: data._id
             });
         } else {
             res.send({ message: "Not Authenticated" });
@@ -57,7 +59,7 @@ module.exports.Studentlogin = (req, res, next) => {
 module.exports.Speakerlogin = (req, res, next) => {
     let token;
     req.body.Password = md5(req.body.Password);
-    speaker.findOne({ UserName: req.body.UserName, password: req.body.Password }).then(data => {
+    speaker.findOne({ Email: req.body.Email, password: req.body.Password }).then(data => {
         if (data) {
             token = jwt.sign({
                 username: req.body.UserName,
@@ -65,7 +67,8 @@ module.exports.Speakerlogin = (req, res, next) => {
             }, privateKey, { expiresIn: '1h' });
             res.json({
                 token: token,
-                role: "Speaker"
+                role: "Speaker",
+                id: data._id
             });
         } else {
             res.send({ message: "Not Authenticated" });
