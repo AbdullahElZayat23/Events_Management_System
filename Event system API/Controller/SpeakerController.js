@@ -2,10 +2,10 @@ const Speaker = require("../Models/Speaker");
 const Events = require("../Models/Event");
 var md5 = require('md5');
 module.exports.GetAllSpeakers = (req, res, next) => {
-    Speaker.find({}).then((Speakers) => { res.json(Speakers); }).catch(err => { next(err.message); });
+    Speaker.find({}, { password: 0, __v: 0 }).then((Speakers) => { res.json(Speakers); }).catch(err => { next(err.message); });
 };
 module.exports.GetSpeakerById = (req, res, next) => {
-    Speaker.findById(req.params.id).then((data) => {
+    Speaker.findById(req.params.id, { password: 0, __v: 0 }).then((data) => {
         if (data) {
             res.status(200).json(data);
         } else {

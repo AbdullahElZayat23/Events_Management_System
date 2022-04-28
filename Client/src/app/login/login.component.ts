@@ -3,9 +3,9 @@ import { Router} from '@angular/router';
 import { AlertAndRedirectService } from '../_services/alert-and-redirect.service';
 import { LoginService } from '../_services/login.service';
 import { environment } from '../../environments/environment';
-import { CurrentUser } from '../_models/current-user';
 import { ErrorHandlerService } from '../_services/error-handler.service';
 import {Event, NavigationStart, NavigationEnd} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -42,15 +42,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("EventSysteMToken",message.data.token);
           localStorage.setItem("EventSysteMRole",message.data.role);
           localStorage.setItem("EventSysteMUser_ID",message.data.id);
-          //set current user
-          CurrentUser.setEmailORuserName(usernameOrEmail);
-          CurrentUser.setType(type);
-          CurrentUser.SetID(message.data.id);
-          CurrentUser.setISlogged(true);
-
+          localStorage.setItem("EventSysteMUser_logged?","true");
           
-          
-
+        
           this.route.navigateByUrl('home');
           } catch (error) {
             this.error.ALertError('Login error ',error);

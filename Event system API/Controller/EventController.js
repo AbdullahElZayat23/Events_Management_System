@@ -1,10 +1,10 @@
 const Event = require("../Models/Event");
 var md5 = require('md5');
 module.exports.GetAllEvents = (req, res, next) => {
-    Event.find({}).then((Events) => { res.json(Events); }).catch(err => { next(err.message); });
+    Event.find({}, { __v: 0 }).then((Events) => { res.json(Events); }).catch(err => { next(err.message); });
 };
 module.exports.GetEventById = (req, res, next) => {
-    Event.findById(req.params.id).then((data) => {
+    Event.findById(req.params.id, { __v: 0 }).then((data) => {
         if (data) {
             res.status(200).json(data);
         } else {

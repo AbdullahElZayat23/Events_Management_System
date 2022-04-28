@@ -1,0 +1,25 @@
+<h3 class="text-center">Speakers list</h3>
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th>ID</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Controlls</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let speaker of speakers">
+            <td>{{speaker._id}}</td>
+            <td>{{speaker.Email}}</td>
+            <td>{{speaker.UserName}}</td>
+            <td>
+                <a [routerLink]="['/home/admin/removespeaker',speaker._id]" class="btn btn-danger">Delete</a>
+            </td>
+            <td>
+                <a [routerLink]="['/home/admin/editSpeaker',speaker._id]" class="btn btn-primary">Edit</a>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

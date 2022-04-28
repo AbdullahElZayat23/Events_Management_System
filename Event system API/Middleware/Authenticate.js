@@ -7,13 +7,16 @@ const privateKey = fs.readFileSync('privart.key.txt', { encoding: 'utf8', flag: 
 module.exports = (req, res, next) => {
     let token, decodedToken;
     try {
-        token = req.get("Authorization").split(" ")[1];
+        token = req.get("authorization").split(" ")[1];
         decodedToken = jwt.verify(token, privateKey);
+
         //authenticated
         req.role = decodedToken.role;
 
+
         next();
     } catch (err) {
+        // console.log(err);
         res.status(401);
         res.send({ message: "Not Authenticated" });
 

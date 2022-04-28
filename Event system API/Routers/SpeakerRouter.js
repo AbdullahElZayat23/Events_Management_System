@@ -12,7 +12,7 @@ router.route('/api/speakers')
 
     })
     .post((req, res, next) => {
-        if (req.role == 'Admin' || req.role == 'Speaker') {
+        if (req.role == 'Speaker') {
             Speaker.CreateSpeaker(req, res, next);
         } else {
             res.redirect('/NotAuthorized');
@@ -27,7 +27,7 @@ router.delete(path + ':id', (req, res, next) => {
     }
 });
 router.put(path + 'email' + '/:id', (req, res, next) => {
-    if (req.role == 'Speaker') {
+    if (req.role == 'Speaker' || req.role == 'Admin') {
         Speaker.UpdateSpeakerEmail(req, res, next);
     } else {
         res.redirect('/NotAuthorized');
@@ -48,7 +48,7 @@ router.put(path + 'username' + '/:id', (req, res, next) => {
     }
 });
 router.put(path + 'address' + '/:id', (req, res, next) => {
-    if (req.role == 'Speaker') {
+    if (req.role == 'Speaker' || req.role == 'Admin') {
         Speaker.UpdateSpeakerAddress(req, res, next);
     } else {
         res.redirect('/NotAuthorized');

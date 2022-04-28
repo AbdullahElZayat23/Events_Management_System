@@ -11,7 +11,7 @@ router.route('/api/students')
         }
     })
     .post((req, res, next) => {
-        if (req.role == 'Admin' || req.role == 'Student') {
+        if (req.role == 'Student') {
             student.CreateStudent(req, res, next);
         } else {
             res.redirect('/NotAuthorized');

@@ -1,0 +1,19 @@
+<div class="text-center ">
+    <h1 class="mt-5 p-3 mb-2 bg-primary text-white">Admin controlls</h1>
+
+    <div>
+        <a type="button" class="btn btn-warning m-3">
+            List Students
+    </a>
+        <a type="button" class="btn btn-warning m-3">
+        List Events
+    </a>
+        <a [routerLink]="['getAllSpeakers']" type="button" class="btn btn-warning m-3">
+        List Speakers
+    </a>
+
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

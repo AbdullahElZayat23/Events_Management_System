@@ -19,6 +19,15 @@ import { AdminComponent } from './home/admin/admin.component';
 import { StudentComponent } from './home/student/student.component';
 import { SpeakerComponent } from './home/speaker/speaker.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { NotauthorizedComponent } from './notauthorized/notauthorized.component';
+import { GetSpeakersComponent } from './home/admin/controlls/get-speakers/get-speakers.component';
+import { RemoveSpeakersComponent } from './home/admin/controlls/remove-speakers/remove-speakers.component';
+import { EditSpeakersComponent } from './home/admin/controlls/edit-speakers/edit-speakers.component';
+import { GetStudentsComponent } from './home/admin/controlls/get-students/get-students.component';
+import { RemoveStudentsComponent } from './home/admin/controlls/remove-students/remove-students.component';
+import { EditStudentsComponent } from './home/admin/controlls/edit-students/edit-students.component';
+import { AuthenticationInterceptorService } from './_services/authentication-interceptor.service';
+
 
 
 @NgModule({
@@ -34,8 +43,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
     StudentComponent,
     SpeakerComponent,
     NotFoundComponent,
-        
-
+    NotauthorizedComponent,
+    GetSpeakersComponent,
+    RemoveSpeakersComponent,
+    EditSpeakersComponent,
+    GetStudentsComponent,
+    RemoveStudentsComponent,
+    EditStudentsComponent,      
   ],
   imports: [
     BrowserModule,
@@ -45,7 +59,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterModule
     
   ],
-  providers: [LoginService,AlertAndRedirectService,ErrorHandlerService],
+  providers: [LoginService,
+    AlertAndRedirectService,
+    ErrorHandlerService,
+    AuthenticationInterceptorService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

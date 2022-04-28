@@ -4,10 +4,10 @@ const md5 = require("md5");
 const Events = require("../Models/Event");
 
 module.exports.GetAllStudents = (req, res, next) => {
-    Student.find({}).then((students) => { res.json(students); }).catch(err => { next(err.message); });
+    Student.find({}, { password: 0, __v: 0 }).then((students) => { res.json(students); }).catch(err => { next(err.message); });
 };
 module.exports.GetStudentById = (req, res, next) => {
-    Student.findById(req.params.id).then((data) => {
+    Student.findById(req.params.id, { password: 0, __v: 0 }).then((data) => {
         if (data) {
             res.status(200).json(data);
         } else {
@@ -81,7 +81,7 @@ module.exports.DeleteStudent = (req, res, next) => {
     }
     //get students events
 module.exports.GetStudentEvents = (req, res, next) => {
-    Events.find({ StudentSID: req.params.id }).then((data) => {
+    Events.find({ StudentSID: req.params.id }, { __v: 0 }).then((data) => {
         if (data) {
             res.status(200).json(data);
         } else {

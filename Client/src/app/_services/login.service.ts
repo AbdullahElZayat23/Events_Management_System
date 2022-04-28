@@ -9,6 +9,7 @@ export class LoginService {
   
   constructor(public requestMaker:HttpService ) { 
   }
+  
 
   async AuthenicateUser(usernameOrEmail:string,password:string,type:string):Promise<any>{
     if(type=="Admin"){

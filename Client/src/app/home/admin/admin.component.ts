@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CurrentUser } from 'src/app/_models/current-user';
 import { LogOutService } from 'src/app/_services/log-out.service';
 @Component({
   selector: 'app-admin',
@@ -19,5 +18,6 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  
 
 }
