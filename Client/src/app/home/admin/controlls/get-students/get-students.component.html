@@ -1,1 +1,26 @@
-<p>get-students works!</p>
+<h3 class="text-center">
+    Speakers list</h3>
+<!-- <h4 class="btn btn-primary m-3">Refresh List</h4> -->
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th>ID</th>
+            <th>Email <span class="alert alert-primary p-0">(Click in email field to edit)</span></th>
+            <th>Controlls</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let student of students">
+            <td>{{student._id}}</td>
+            <td>
+                <span contenteditable="true" #email class="px-5 py-2" (keyup)="checkEmail(email.innerText,student._id)">{{student.Email}}</span>
+                <p class="alert alert-danger" id="message{{student._id}}" style="display: none;">Invalid Email</p>
+            </td>
+
+            <td>
+                <a [routerLink]="['/home/admin/removestudent',student._id]" class="btn btn-danger m-2">Delete</a>
+                <a (click)="edit(email.innerText,student._id)" class="btn btn-primary m-2">Save changes</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

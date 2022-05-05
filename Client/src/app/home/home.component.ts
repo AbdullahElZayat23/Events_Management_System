@@ -1,4 +1,4 @@
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertAndRedirectService } from '../_services/alert-and-redirect.service';
 import { ErrorHandlerService } from '../_services/error-handler.service';
@@ -10,7 +10,11 @@ import { LogOutService } from '../_services/log-out.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public route:Router,public error:ErrorHandlerService,public logout:LogOutService) { }
+  constructor(public route:Router,
+    public error:ErrorHandlerService,
+    public logout:LogOutService,
+    ) { }
+ 
 
   ngOnInit(): void {
     let token = localStorage.getItem('EventSysteMToken');

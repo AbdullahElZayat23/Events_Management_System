@@ -1,4 +1,5 @@
 <h3 class="text-center">Speakers list</h3>
+<!-- <h4 class="btn btn-primary m-3">Refresh List</h4> -->
 <table class="table">
     <thead>
         <tr class="text-center">
@@ -14,12 +15,9 @@
             <td>{{speaker.Email}}</td>
             <td>{{speaker.UserName}}</td>
             <td>
-                <a [routerLink]="['/home/admin/removespeaker',speaker._id]" class="btn btn-danger">Delete</a>
+                <a [routerLink]="['/home/admin/removespeaker',speaker._id]" class="btn btn-danger m-2">Delete</a>
+                <a [routerLink]="['/home/admin/editSpeaker',speaker._id]" class="btn btn-primary m-2">Edit</a>
             </td>
-            <td>
-                <a [routerLink]="['/home/admin/editSpeaker',speaker._id]" class="btn btn-primary">Edit</a>
-            </td>
-
         </tr>
     </tbody>
 </table>

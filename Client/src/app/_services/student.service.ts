@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
-import {HttpService} from './http.service';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StudentMock } from '../_models/student-mock';
+import { StudentEventsMock } from '../_models/student-events-mock';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService {
+export class studentsService {
+  token:string = localStorage.getItem('EventSysteMToken')!;
+   header = {
+    headers: new HttpHeaders()
+      .set('Authorization',  `Bearer ${this.token}`)
+  }
+  constructor(public http:HttpClient) { }
 
-  constructor(public requestMaker:HttpService) { 
-    
+  getAllStudents(){
+    return this.http.get<StudentMock[]>(environment.APIurl+'students',this.header);
   }
-  getStudentList(){
-    return this.requestMaker.sendGetRequest('students');
+  getStudentByID(id:number){
+    return this.http.get<StudentMock>(environment.APIurl+'students/'+id,this.header);
   }
-  getStudentById(id:string){
-    return this.requestMaker.sendGetRequestWithParams('students/',id);
+
+  getStudentEvents(id:number){
+    return this.http.get<StudentEventsMock>(environment.APIurl+'students/events/'+id);
+
   }
-  addStudent(data:Object){
-    return this.requestMaker.sendPostRequestWithBody('students',data);
+
+  deleteStudent(id:number){
+    return this.http.delete(environment.APIurl+'Students/'+id,this.header);
   }
-  updateStudentPassword(id:string,data:Object){
-    return this.requestMaker.sendPutRequestWithParamsAndBody('students/password',data,id);
+
+  updateStudentEmail(id:number,email:string){
+    return this.http.put(environment.APIurl+'Students/email/'+id,{Email:email},this.header);
   }
-  updateStudentEdmail(id:string,data:Object){
-    return this.requestMaker.sendPutRequestWithParamsAndBody('students/email/',data,id);
+
+  updateStudentPassword(id:number,NewPassword:string){
+    return this.http.put(environment.APIurl+'Students/password/'+id,{ password: {NewPassword}},this.header);
   }
-  getStudentsEvents(id:string){
-    return this.requestMaker.sendGetRequestWithParams('students/events/',id);
-  }
-  deletStudent(id:string){
-    return this.requestMaker.sendDeleteRequestWithParams('students/',id);
-  }
+
+
 }

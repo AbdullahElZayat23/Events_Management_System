@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-            title = 'Event-Management-System';          
+export class AppComponent implements OnInit {
+  constructor(private primengConfig: PrimeNGConfig){}
+title = 'Event-Management-System'; 
+ngOnInit() {
+this.primengConfig.ripple = true;
+}         
 }
 
 

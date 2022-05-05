@@ -8,6 +8,6 @@ export class ErrorHandlerService {
   constructor() { }
 
   ALertError(location:string,error:any){
-    alert(`error: ${location} `+error);
+    alert(`error: ${location} `+error);    
   }
 }

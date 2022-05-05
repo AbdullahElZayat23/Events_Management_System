@@ -1,0 +1,28 @@
+<div class="container mt-5 mb-5">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+                <div class="form-input"> <input type="text" #title maxlength="50" class="form-control" placeholder="Title"> </div>
+                <div class="form-input"> <input #date type="date" class="form-control"> </div>
+                <div class="form-input">
+                    <label>Main speaker ID</label>
+                    <br>
+                    <br>
+                    <select class="form-select" #Mainspeaker>
+                       <option selected disabled></option>
+                            <option *ngFor="let speaker of speakers;">
+                                {{'ID: '+speaker._id +' ,Username: '+ speaker.UserName }}
+                            </option>                                                 
+                    </select>
+                </div>
+                <label class="m-2">Sub speakers IDs</label>
+
+                <p-multiSelect [options]="subSpeakers" [displaySelectedLabel]="false" placeholder="Select subspeakers" [(ngModel)]="selectedSubspeakersIDs" optionLabel="Email" optionValue="_id"></p-multiSelect>
+                <label class="m-2">Students IDs</label>
+
+                <p-multiSelect [options]="eventStudents" [displaySelectedLabel]="false" placeholder="Select students" [(ngModel)]="selectedStudentIDs" optionLabel="Email" optionValue="_id"></p-multiSelect>
+                <div class="form-check"> <button (click)="saveEvent(title.value,Mainspeaker.value,date.value)" class="btn btn-primary mt-4 signup">Create</button></div>
+            </div>
+        </div>
+    </div>
+</div>

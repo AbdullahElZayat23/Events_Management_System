@@ -16,10 +16,15 @@ import { StudentGuard } from './_guards/student.guard';
 import { GetSpeakersComponent } from './home/admin/controlls/get-speakers/get-speakers.component';
 import { GetStudentsComponent } from './home/admin/controlls/get-students/get-students.component';
 import { EditSpeakersComponent } from './home/admin/controlls/edit-speakers/edit-speakers.component';
-import { EditStudentsComponent } from './home/admin/controlls/edit-students/edit-students.component';
 import { RemoveStudentsComponent } from './home/admin/controlls/remove-students/remove-students.component';
 import { RemoveSpeakersComponent } from './home/admin/controlls/remove-speakers/remove-speakers.component';
 import { LoginGuard } from './_guards/login.guard';
+import { GetEventsComponent } from './home/admin/controlls/get-events/get-events.component';
+import { EditEventsComponent } from './home/admin/controlls/edit-events/edit-events.component';
+import { RemoveEventsComponent } from './home/admin/controlls/remove-events/remove-events.component';
+import { AddEventComponent } from './home/admin/controlls/add-event/add-event.component';
+import { DeclineeventComponent } from './home/admin/controlls/declineevent/declineevent.component';
+import { EditStudentsAndSubspeakersComponent } from './home/admin/controlls/edit-students-and-subspeakers/edit-students-and-subspeakers.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent,canActivate:[LoginGuard]},
   {path:'register',component:RegisterParentComponent,children:[
@@ -30,10 +35,15 @@ const routes: Routes = [
     {path:'admin',component:AdminComponent,canActivate:[AdminGuard],children:[
       {path:'getAllSpeakers',component:GetSpeakersComponent},
       {path:'getAllStudents',component:GetStudentsComponent},
-      {path:'editSpeaker/:id',component:EditSpeakersComponent},
-      {path:'editStudent/:id',component:EditStudentsComponent},
+      {path:'editSpeaker/:id',component:EditSpeakersComponent},      
       {path:'removestudent/:id',component:RemoveStudentsComponent},
-      {path:'removespeaker/:id',component:RemoveSpeakersComponent}
+      {path:'removespeaker/:id',component:RemoveSpeakersComponent},
+      {path:'getAllEvents',component:GetEventsComponent},
+      {path:'editEvnet/:id',component:EditEventsComponent},
+      {path:'declineevent/:id',component:DeclineeventComponent},
+      {path:'editStudentsAndSpeakers/:id',component:EditStudentsAndSubspeakersComponent},
+      {path:'removeEvnet/:id',component:RemoveEventsComponent},
+      {path:'addEvent',component:AddEventComponent},
     ]},
     {path:'speaker',component:SpeakerComponent,canActivate:[SpeakerGuard]},
     {path:'student',component:StudentComponent,canActivate:[StudentGuard]},

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           }
         }
   let message = await this.logIn.AuthenicateUser(usernameOrEmail,password,type);
-        if(this.alert.ValidateMessage(message,environment.login)){
+        if(/*this.alert.ValidateMessage(message,environment.login*/true){
           try {
           localStorage.setItem("EventSysteMToken",message.data.token);
           localStorage.setItem("EventSysteMRole",message.data.role);

@@ -62,7 +62,7 @@ export class EditSpeakersComponent implements OnInit {
       }
     );
     if(this.ok){
-      this.route.navigateByUrl('/home/admin/getAllSpeakers');
+      this.route.navigateByUrl('/home/admin');
     }
   }
   cancel(){

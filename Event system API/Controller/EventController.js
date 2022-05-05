@@ -1,5 +1,6 @@
 const Event = require("../Models/Event");
-var md5 = require('md5');
+const md5 = require('md5');
+const Speaker = require('../Models/Speaker');
 module.exports.GetAllEvents = (req, res, next) => {
     Event.find({}, { __v: 0 }).then((Events) => { res.json(Events); }).catch(err => { next(err.message); });
 };
@@ -21,7 +22,6 @@ module.exports.CreateEvent = (req, res, next) => {
                 res.status(200).json({ message: "Event not created" });
             }
         }).catch(err => { next(err.message); });
-
     }
     //update event
 module.exports.UpdateEvent = (req, res, next) => {
@@ -128,6 +128,57 @@ module.exports.DeclineEvent = (req, res, next) => {
     Event.findByIdAndUpdate(req.params.id, { $set: { Status: "Declined" } }).then((data) => {
         if (data) {
             res.status(200).json({ message: "Event updated" });
+        } else {
+            res.status(200).json({ message: "Event not found" });
+        }
+    }).catch(err => {
+        next(err.message);
+    });
+}
+
+module.exports.GetEventMainSpeakerName = (req, res, next) => {
+    Speaker.findOne({ _id: req.params.id }, { UserName: 1, _id: 0 }).then(data => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(200).json({ message: "Mainspeaker not found" });
+        }
+    }).catch(
+        error => {
+            next(err.message);
+        }
+    );
+}
+
+
+module.exports.UpdateEventTitle = (req, res, next) => {
+    Event.findByIdAndUpdate(req.params.id, { $set: { Title: req.body.Title } }).then((data) => {
+        if (data) {
+            res.status(200).json({ message: "Event Title updated" });
+        } else {
+            res.status(200).json({ message: "Event not found" });
+        }
+    }).catch(err => {
+        next(err.message);
+    });
+}
+
+module.exports.UpdateEventDate = (req, res, next) => {
+    Event.findByIdAndUpdate(req.params.id, { $set: { Eventdate: req.body.Eventdate } }).then((data) => {
+        if (data) {
+            res.status(200).json({ message: "Event date updated" });
+        } else {
+            res.status(200).json({ message: "Event not found" });
+        }
+    }).catch(err => {
+        next(err.message);
+    });
+}
+
+module.exports.UpdateEventMainSpeaker = (req, res, next) => {
+    Event.findByIdAndUpdate(req.params.id, { $set: { MainSpeakerID: req.body.MainSpeakerID } }).then((data) => {
+        if (data) {
+            res.status(200).json({ message: "Event mainspeaker updated" });
         } else {
             res.status(200).json({ message: "Event not found" });
         }

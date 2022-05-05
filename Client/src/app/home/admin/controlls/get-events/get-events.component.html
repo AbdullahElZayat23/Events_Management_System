@@ -1,0 +1,54 @@
+<a [routerLink]="['/home/admin/addEvent']" class="sticky-top btn btn-primary m-5 sticky-top">Add event</a>
+<div class="content" style="margin-left: 120px">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of events">
+            <mat-card class="mat-elevation-z4 card">
+                <mat-card-header>
+                    <mat-card-title class="h3">{{item.Title}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="./../../../../../assets/images/usercard.png">
+
+                <mat-card-content>
+                    <p>
+                        @ {{item.Eventdate}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a [routerLink]="['/home/admin/editEvnet',item._id]" mat-button class="btn btn-primary">Edit info</a>
+                    <a [routerLink]="['/home/admin/removeEvnet',item._id]" mat-button class="btn btn-danger">Remove</a>
+                    <a [routerLink]="['/home/admin/editStudentsAndSpeakers',item._id]" mat-button class="btn btn-warning">Edit students & sub-speakers</a>
+                    <a [routerLink]="['/home/admin/declineevent',item._id]" mat-button class="btn btn-info">Decline</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="" style="column-count:3;">
+    <div class="" *ngFor="let item of events">
+        <div class="card m-5" style="width: 18rem;">
+            <img src="../../../../../assets/images/usercard.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">{{item.Title}}</h4>
+                <h5>{{item.MainSpeakerID}}</h5>
+                <p>@ {{item.Eventdate}}</p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div> -->

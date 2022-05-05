@@ -66,7 +66,7 @@ checkEmail(email:string){
     this.ok=true;
   }else{
     this.emailOk=false;
-    this.emailOk=false;
+    this.ok=false;
   }
 }
 

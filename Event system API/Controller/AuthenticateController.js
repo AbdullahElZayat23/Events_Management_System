@@ -17,7 +17,7 @@ module.exports.Adminlogin = (req, res, next) => {
             token = jwt.sign({
                 username: req.body.UserName,
                 role: "Admin"
-            }, privateKey, { expiresIn: '5h' });
+            }, privateKey, { expiresIn: '9999 years', });
             res.json({
                 token: token,
                 role: "Admin",
@@ -40,7 +40,7 @@ module.exports.Studentlogin = (req, res, next) => {
             token = jwt.sign({
                 Email: req.body.Email,
                 role: "Student"
-            }, privateKey, { expiresIn: '5h' });
+            }, privateKey, { expiresIn: '9999 years' });
             res.json({
                 token: token,
                 role: "Student",
@@ -64,7 +64,7 @@ module.exports.Speakerlogin = (req, res, next) => {
             token = jwt.sign({
                 username: req.body.UserName,
                 role: "Speaker"
-            }, privateKey, { expiresIn: '5h' });
+            }, privateKey, { expiresIn: '9999 years' });
             res.json({
                 token: token,
                 role: "Speaker",

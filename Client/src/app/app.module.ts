@@ -25,9 +25,19 @@ import { RemoveSpeakersComponent } from './home/admin/controlls/remove-speakers/
 import { EditSpeakersComponent } from './home/admin/controlls/edit-speakers/edit-speakers.component';
 import { GetStudentsComponent } from './home/admin/controlls/get-students/get-students.component';
 import { RemoveStudentsComponent } from './home/admin/controlls/remove-students/remove-students.component';
-import { EditStudentsComponent } from './home/admin/controlls/edit-students/edit-students.component';
 import { AuthenticationInterceptorService } from './_services/authentication-interceptor.service';
-
+import { GetEventsComponent } from './home/admin/controlls/get-events/get-events.component';
+import { EditEventsComponent } from './home/admin/controlls/edit-events/edit-events.component';
+import { RemoveEventsComponent } from './home/admin/controlls/remove-events/remove-events.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AddEventComponent } from './home/admin/controlls/add-event/add-event.component';
+import {MultiSelectModule} from 'primeng/multiselect';
+import { DeclineeventComponent } from './home/admin/controlls/declineevent/declineevent.component';
+import { EditStudentsAndSubspeakersComponent } from './home/admin/controlls/edit-students-and-subspeakers/edit-students-and-subspeakers.component';
 
 
 @NgModule({
@@ -49,15 +59,27 @@ import { AuthenticationInterceptorService } from './_services/authentication-int
     EditSpeakersComponent,
     GetStudentsComponent,
     RemoveStudentsComponent,
-    EditStudentsComponent,      
+    GetEventsComponent,
+    EditEventsComponent,
+    RemoveEventsComponent,
+    AddEventComponent,
+    DeclineeventComponent,
+    EditStudentsAndSubspeakersComponent,
+         
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
-    
+    RouterModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MultiSelectModule
+
   ],
   providers: [LoginService,
     AlertAndRedirectService,
